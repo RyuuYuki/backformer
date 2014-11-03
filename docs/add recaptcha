@@ -1,0 +1,31 @@
+   <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+
+      <!-- Wrapping the Recaptcha create method in a javascript function -->
+      <script type="text/javascript">
+         function showRecaptcha(element) {
+           Recaptcha.create("6Lc8LvESAAAAAITHYjSPIK5eHO67eItGvQ1cLh0T", element, {
+             theme: "white",
+             lang : 'ru',
+             callback: Recaptcha.focus_response_field});
+         }
+      </script>
+<div id="recaptcha_div"></div>
+
+
+на сервере:
+
+require_once(PATH_BACK_FORM.'classes/recaptcha/recaptchalib.php');
+$privatekey = '6Lc8LvESAAAAAAIgM5emqGnsNO1uAjvDl5LeDVKN';
+$resp = recaptcha_check_answer ($privatekey,
+                                $_SERVER["REMOTE_ADDR"],
+                                $_POST["recaptcha_challenge_field"],
+                                $_POST["recaptcha_response_field"]);
+
+
+$d = $resp->is_valid ? 1 : 0;
+
+
+мануал:
+
+https://developers.google.com/recaptcha/docs/display
+https://developers.google.com/recaptcha/docs/php
