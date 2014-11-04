@@ -39,43 +39,43 @@ Ajax форма обратной связи, легко интегрируема
 
 ###2. Пример вызова формы
 
-<div class="backformer" id="demo">
-	<div class="bf-header">
-		Форма отправки сообщения!
-	</div>
-	<div class="bf-status"></div>
-	<div class="bf-content">
-		<form action="/backformer/index.php" method="post">
-			<input class="bf-token" name="bf-token" type="hidden" value="" /> 
-			<input name="config" type="hidden" value="demo" />
-			<div class="bf-row">
-				<div class="bf-info-text">Имя:</div>
-				<input required="required" name="name" placeholder="Обязательное поле" type="text" value="" />
-			</div>
-			<div class="bf-row">
-				<div class="bf-info-text">Телефон:</div>
-				<input required="required" placeholder="Обязательное поле"  name="phone" placeholder="Обязательное поле" type="text" value="" />
-			</div>
-			<div class="bf-row">
-				<div class="bf-info-text">Комментарий:</div>
-				<textarea cols="40" rows="10" name="comment"></textarea>
-			</div>
-			<div class="bf-row">
-				<div class="bf-info-text">Прикрепить файлы:</div>
-				<input multiple="multiple" name="upload_file[]" type="file" />
-			</div>
-			<div class="bf-row">
-				<div class="bf-info-img"> 
-					<img title="Обновить картинку" class="img-capcha" src="/backformer/model/kcaptcha/index.php" alt="" />
+	<div class="backformer" id="demo">
+		<div class="bf-header">
+			Форма отправки сообщения!
+		</div>
+		<div class="bf-status"></div>
+		<div class="bf-content">
+			<form action="/backformer/index.php" method="post">
+				<input class="bf-token" name="bf-token" type="hidden" value="" /> 
+				<input name="config" type="hidden" value="demo" />
+				<div class="bf-row">
+					<div class="bf-info-text">Имя:</div>
+					<input required="required" name="name" placeholder="Обязательное поле" type="text" value="" />
 				</div>
-				<input class="capcha"  name="capcha" placeholder="Код с картинки" type="text" value="" />
-			</div>
-			<div class="bf-submit">
-				<input class="btn" name="submit" type="submit" value="Отправить"/>
-			</div>
-		</form>
+				<div class="bf-row">
+					<div class="bf-info-text">Телефон:</div>
+					<input required="required" placeholder="Обязательное поле"  name="phone" placeholder="Обязательное поле" type="text" value="" />
+				</div>
+				<div class="bf-row">
+					<div class="bf-info-text">Комментарий:</div>
+					<textarea cols="40" rows="10" name="comment"></textarea>
+				</div>
+				<div class="bf-row">
+					<div class="bf-info-text">Прикрепить файлы:</div>
+					<input multiple="multiple" name="upload_file[]" type="file" />
+				</div>
+				<div class="bf-row">
+					<div class="bf-info-img"> 
+						<img title="Обновить картинку" class="img-capcha" src="/backformer/model/kcaptcha/index.php" alt="" />
+					</div>
+					<input class="capcha"  name="capcha" placeholder="Код с картинки" type="text" value="" />
+				</div>
+				<div class="bf-submit">
+					<input class="btn" name="submit" type="submit" value="Отправить"/>
+				</div>
+			</form>
+		</div>
 	</div>
-</div>
 
 Что из этого нужно знать:
 
