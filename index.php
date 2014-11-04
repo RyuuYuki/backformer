@@ -1,6 +1,10 @@
 <?php
-ini_set('error_reporting', E_ALL);
-ini_set ('display_errors', 1);
+
+$debug = 0;
+if($debug > 0) {
+	ini_set('error_reporting', E_ALL);
+	ini_set ('display_errors', 1);
+}
  
 define("PATH_BACKFORMER", $_SERVER['DOCUMENT_ROOT'].'/backformer/');
 session_start();
