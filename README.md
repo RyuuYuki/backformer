@@ -3,11 +3,14 @@
 Ajax форма обратной связи, легко интегрируемая абсолютно в любую CMS.
 
 ##Достоинства
-*Поддержка капчи, по умолчанию отключено.
+* Поддержка капчи.
+* Поддержка прикрепления к письму нескольких файлов.
+* Защита от спама, CSRF.
+* Поддержка работы с несколькими формами на одной странице
 
-## Как подключить в три шага
+## Как подключить
 
-###1. Подключить скрипты
+###1. Подключить скрипты в указанной последовательности
 
 Для работы формы потребуется jquery:
 
@@ -34,59 +37,64 @@ Ajax форма обратной связи, легко интегрируема
     <script src="/backformer/components/backformer/backformer.js"></script>
     <!-- // end back form -->
 
-##Пример формы
+###2. Пример вызова формы
 
-        <div class="backformer">
-                
-            <div class="bf-header">
-                    Форма отправки сообщения!
-            </div>
+<div class="backformer" id="demo">
+	<div class="bf-header">
+		Форма отправки сообщения!
+	</div>
+	<div class="bf-status"></div>
+	<div class="bf-content">
+		<form action="/backformer/index.php" method="post">
+			<input class="bf-token" name="bf-token" type="hidden" value="" /> 
+			<input name="config" type="hidden" value="demo" />
+			<div class="bf-row">
+				<div class="bf-info-text">Имя:</div>
+				<input required="required" name="name" placeholder="Обязательное поле" type="text" value="" />
+			</div>
+			<div class="bf-row">
+				<div class="bf-info-text">Телефон:</div>
+				<input required="required" placeholder="Обязательное поле"  name="phone" placeholder="Обязательное поле" type="text" value="" />
+			</div>
+			<div class="bf-row">
+				<div class="bf-info-text">Комментарий:</div>
+				<textarea cols="40" rows="10" name="comment"></textarea>
+			</div>
+			<div class="bf-row">
+				<div class="bf-info-text">Прикрепить файлы:</div>
+				<input multiple="multiple" name="upload_file[]" type="file" />
+			</div>
+			<div class="bf-row">
+				<div class="bf-info-img"> 
+					<img title="Обновить картинку" class="img-capcha" src="/backformer/model/kcaptcha/index.php" alt="" />
+				</div>
+				<input class="capcha"  name="capcha" placeholder="Код с картинки" type="text" value="" />
+			</div>
+			<div class="bf-submit">
+				<input class="btn" name="submit" type="submit" value="Отправить"/>
+			</div>
+		</form>
+	</div>
+</div>
 
-            <div class="bf-status"></div>  
+Что из этого нужно знать:
 
-            <div class="bf-content">
-                <form action="/backformer/index.php" method="post">
+<input name="config" type="hidden" value="demo" />
 
-                    <input class="bf-token" name="bf-token" type="hidden" value="" /> 
+Это поле используется для выбора конфигурации отправки сообщения. В данном случае конфигурация будет лежать в папке **config/demo**. Можно создать сколько угодно конфигураций, просто копируя эту папку с другим названием. 
 
-                    <input name="config" type="hidden" value="demo" />
+####Что внутри
 
-                    <div class="bf-row">
-                        <div class="bf-info-text">Имя:</div>
-                        <input required="required" name="name" placeholder="Обязательное поле" type="text" value="" />
-                    </div>
+* config.inc.php - конфигурационный файл
+* report.html - шаблон отправки на почту. В качестве шаблона для полей используется конструкция **[+название_поля+]** 
 
-                    <div class="bf-row">
-                        <div class="bf-info-text">Телефон:</div>
-                        <input required="required" placeholder="Обязательное поле"  name="phone" placeholder="Обязательное поле" type="text" value="" />
-                    </div>
-                    
-                    <div class="bf-row">
-                            <div class="bf-info-text">Комментарий:</div>
-                            <textarea cols="40" rows="10" name="comment"></textarea>
-                    </div>
+#Пример вывоза всплывающего окна Fancybox
 
-                    <div class="bf-row">
-                        <div class="bf-info-text">Прикрепить файлы:</div>
-                        <input multiple="multiple" name="upload_file[]" type="file" />
-                    </div>
+Для создания всплывающего окна достаточно присвоить в атрибут **href** тега **<a>** ссылку **#demo**. 
 
-                     <div class="bf-row">
-                        <div class="bf-info-img"> 
-                      <img title="Обновить картинку" class="img-capcha" src="/backformer/model/kcaptcha/index.php" alt="" />
+<a href="#demo" class="fancybox">Форма связи</a>
 
-                        </div>
+И установить идентификатор **demo** на форму.
 
-                      
-                        <input class="capcha"  name="capcha" placeholder="Код с картинки" type="text" value="" />
-                    </div>
-                        
-                    <div class="bf-submit">
-                             
-                        <input class="btn" name="submit" type="submit" value="Отправить"/>
-                    </div>
-                </form>
-            </div>
-        </div>
+<div class="backformer" id="demo">
 
-#Пример вывоза 
