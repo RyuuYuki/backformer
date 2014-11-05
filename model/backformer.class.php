@@ -79,7 +79,7 @@ class Backformer {
 					$out = array('status' => 0, 'value' => $this->lang['err']['empty']);
 				}
 			} else {
-				$out = array('status' => 0, 'value' => $this->lang['err']['spam'].$_SESSION['bf-token'].'='.$_POST['bf-token']);
+				$out = array('status' => 0, 'value' => $this->lang['err']['spam']);
 			}
 		} else {
 			$out = array('status' => 0, 'value' => $this->lang['err']['capcha']);
