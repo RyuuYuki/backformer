@@ -7,7 +7,6 @@ if($debug > 0) {
 }
  
 define("PATH_BACKFORMER", $_SERVER['DOCUMENT_ROOT'].'/backformer/');
-session_start();
 
 $used_config = isset($_POST['config']) ? preg_replace ("/[^a-zA-Z0-9_\-]/","",$_POST['config']) : ''; 
 $type = isset($_POST['type']) ? intval($_POST['type']) : 0;
