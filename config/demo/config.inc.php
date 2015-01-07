@@ -4,7 +4,7 @@
 * Почта получателей, через запятую
 * Пример:  'email@example.com, add_email@example.com' или просто 'email@example.com'
 ***/
-$conf['to'] = 'gmgsar@yandex.ru';
+$conf['to'] = 'to@gmail.com';
 /***
 * Почта, которая будет указана в качестве адреса отправителя 
 * Пример:  'email@example.com'
