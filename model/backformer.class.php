@@ -52,7 +52,7 @@ class Backformer {
 					if(!empty($to)) {
  
 						$body = $this->parser_template('config/'.$this->conf['conf_name'].'/report.html', $info);
-						$subject = empty($subject) ? $this->lang['main']['subject'] : $subject;
+						$subject = empty($this->conf['subject']) ? $this->lang['main']['subject'] : $this->conf['subject'];
 
 						if(
 							$this->set_mail(

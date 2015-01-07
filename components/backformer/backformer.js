@@ -1,8 +1,11 @@
 //jQuery.noConflict();
 (function($) {
     $(function() {
-        $(".fancybox").fancybox();
 
+        if(typeof $(".fancybox").fancybox == 'function') {
+            $(".fancybox").fancybox();
+        }
+   
         $( ".img-capcha").on( "click", function() {
             update_capcha();
         });
@@ -51,7 +54,6 @@
             );
         });
     });
-})(jQuery); 
 
 function update_capcha() {
     $.post("/backformer/model/kcaptcha/index.php");
@@ -69,3 +71,6 @@ function get_token() {
         }
     );
 }
+
+})(jQuery); 
+
