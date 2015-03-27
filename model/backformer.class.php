@@ -189,7 +189,7 @@ class Backformer {
 		foreach ($placeholder as $k => $v){
 			$chunk = str_replace("[+".$k."+]", $v, $chunk);
 		}
-		$chunk = preg_replace('/\[\+[0-9a-zA-Z]*\+\]/i', '-', $chunk);
+		$chunk = preg_replace('/\[\+[0-9a-zA-Z_]*\+\]/i', '-', $chunk);
 		return $chunk;
 	}
 
