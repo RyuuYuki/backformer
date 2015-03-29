@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-#Backformer
+#Backformer 2.0
 
 Ajax форма обратной связи, легко интегрируемая абсолютно в любую CMS.
 
@@ -19,73 +17,68 @@ Ajax форма обратной связи, легко интегрируема
 Для работы формы потребуется jquery:
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
- 
-Опционально, [галерея fancyBox](https://github.com/fancyapps/fancyBox) для модальных окон:
-
-    <!-- Add fancyBox main JS and CSS files -->
-    <script type="text/javascript" src="/backformer/components/fancybox_2.1.5/source/jquery.fancybox.js?v=2.1.5">
-    </script>
-    <link rel="stylesheet" type="text/css" href="/backformer/components/fancybox_2.1.5/source/jquery.fancybox.css?v=2.1.5" media="screen" />
-    <!-- // end add fancyBox -->
 
 Плагин jquery для отправки форм [jquery.form.js](https://github.com/malsup/form):
 
     <!-- ajax jquery form -->
-    <script src="/backformer/components/jquery.form.js"></script>
+    <script src="/backformer/core/components/jquery_form/jquery.form.min.js"></script>
     <!-- // end ajax jquery form -->
 
-Собственно сам скрипт:
+Сам скрипт:
 
     <!-- back form -->
     <link href="/backformer/components/backformer/backformer.css" type="text/css" rel="stylesheet" />
     <script src="/backformer/components/backformer/backformer.js"></script>
     <!-- // end back form -->
+    
+Опционально, [галерея fancyBox](https://github.com/fancyapps/fancyBox) для модальных окон:
+
+    <!-- Add fancyBox main JS and CSS files -->
+    <script type="text/javascript" src="/backformer/core/components/fancybox_2.1.5/source/jquery.fancybox.pack.js">
+    </script>
+    <link rel="stylesheet" type="text/css" href="/backformer/core/components/fancybox_2.1.5/source/jquery.fancybox.css" media="screen" />
+    <!-- // end add fancyBox -->
+
+####Параметры
+
+	data-bf-config=""
+
+Это поле используется для выбора конфигурации отправки сообщения. В данном случае конфигурация будет лежать в папке **config/demo**. Можно создать сколько угодно конфигураций, просто копируя эту папку с другим названием.     
 
 ###2. Пример вызова формы
 
-	<div class="backformer" id="demo">
-		<div class="bf-header">
-			Форма отправки сообщения!
-		</div>
-		<div class="bf-status"></div>
-		<div class="bf-content">
-			<form action="/backformer/index.php" method="post">
-				<input class="bf-token" name="bf-token" type="hidden" value="" /> 
-				<input name="config" type="hidden" value="demo" />
-				<div class="bf-row">
-					<div class="bf-info-text">Имя:</div>
-					<input required="required" name="name" placeholder="Обязательное поле" type="text" value="" />
-				</div>
-				<div class="bf-row">
-					<div class="bf-info-text">Телефон:</div>
-					<input required="required" placeholder="Обязательное поле"  name="phone" placeholder="Обязательное поле" type="text" value="" />
-				</div>
-				<div class="bf-row">
-					<div class="bf-info-text">Комментарий:</div>
-					<textarea cols="40" rows="10" name="comment"></textarea>
-				</div>
-				<div class="bf-row">
-					<div class="bf-info-text">Прикрепить файлы:</div>
-					<input multiple="multiple" name="upload_file[]" type="file" />
-				</div>
-				<div class="bf-row">
-					<div class="bf-info-img"> 
-						<img title="Обновить картинку" class="img-capcha" src="/backformer/model/kcaptcha/index.php" alt="" />
-					</div>
-					<input class="capcha"  name="capcha" placeholder="Код с картинки" type="text" value="" />
-				</div>
-				<div class="bf-submit">
-					<input class="btn" name="submit" type="submit" value="Отправить"/>
-				</div>
-			</form>
-		</div>
-	</div>
-
-####Что из этого нужно знать
-
-	<input name="config" type="hidden" value="demo" />
-
-Это поле используется для выбора конфигурации отправки сообщения. В данном случае конфигурация будет лежать в папке **config/demo**. Можно создать сколько угодно конфигураций, просто копируя эту папку с другим названием. 
+    <div class="bf-content-inline">
+        <div class="bf-header">
+            Форма отправки сообщения!
+        </div>
+        <form data-bf-config="" action="" method="post">
+            <div class="bf-row">
+                <label>Имя:</label>
+                <input required="required" name="name" placeholder="Обязательное поле" type="text" value="" />
+            </div>
+            <div class="bf-row">
+                <label>Телефон:</label>
+                <input required="required" name="phone" placeholder="Обязательное поле" type="text" value="" />
+            </div>
+            <div class="bf-row">
+                <label>Комментарий:</label>
+                <textarea cols="40" rows="10" name="comment"></textarea>
+            </div>
+            <div class="bf-row">
+                <label>Прикрепить файлы:</label>
+                <input multiple="multiple" name="upload_file[]" type="file" />
+            </div>
+            <div class="bf-row">
+                <div class="bf-info-img">
+                    <img title="Обновить картинку" class="bf-img-capcha" src="/backformer/core/model/kcaptcha/index.php" alt="" />
+                </div>
+                <input class="capcha" name="capcha" placeholder="Код с картинки" type="text" value="" />
+            </div>
+            <div class="bf-submit">
+                <input class="bf-button" name="submit" type="submit" value="Отправить" />
+            </div>
+        </form>
+    </div>
 
 ####Что внутри
 
@@ -101,12 +94,4 @@ Ajax форма обратной связи, легко интегрируема
 И установить идентификатор **demo** на форму.
 
 	<div class="backformer" id="demo">
-
-=======
-bf2
-===
->>>>>>> 863aa922f8ce00f785c7cf16a1c5a06c2675b70c
-=======
-bf2
-===
->>>>>>> 863aa922f8ce00f785c7cf16a1c5a06c2675b70c
+ 
