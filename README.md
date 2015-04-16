@@ -37,8 +37,8 @@ Ajax форма обратной связи, легко интегрируема
 Сам скрипт:
 
     <!-- back form -->
-    <link href="/backformer/components/backformer/backformer.css" type="text/css" rel="stylesheet" />
-    <script src="/backformer/components/backformer.js"></script>
+    <link href="/backformer/core/themes/default.css" type="text/css" rel="stylesheet" />
+    <script src="/backformer/core/components/backformer.js"></script>
     <!-- // end back form -->
 
 ####Параметры
