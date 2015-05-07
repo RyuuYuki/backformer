@@ -4,7 +4,7 @@
 * Почта получателей, через запятую
 * Пример:  'email@example.com, add_email@example.com' или просто 'email@example.com'
 ***/
-$config['to'] = 'gmgsar@yandex.ru';
+$config['to'] = 'rugoals@gmail.com';
 /***
 * Поля обязательные для заполнения.
 * Пример: 'name,email,phone'
@@ -37,5 +37,5 @@ $config['used_lang'] = 'ru';
 * empty_field - проверка на пустые поля, заполненные в параметре - 'need_field';
 * Пример: 'capcha,spam,empty_field'.
 ***/
-$config['error_type'] = 'capcha,spam,empty_field';
+$config['error_type'] = 'spam,empty_field';
 
