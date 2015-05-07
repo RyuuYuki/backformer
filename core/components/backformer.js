@@ -18,19 +18,26 @@
         $('[data-bf-init="popup"]').on("click", function(e) {
             e.preventDefault();
             if (typeof $('[data-bf-init="popup"]').fancybox == 'function') {
+
+                var config = $(this).data("bf-config");
+
+                if (typeof config == 'undefined' || config.length < 1) {
+                    config = 'default';
+                }
+
                 $.fancybox({
                     type: 'ajax',
                     beforeLoad: function() {
-                        this.href = bf_path + '/configs/default/form.html';
+                        this.href = bf_path + '/configs/' + config + '/form.html';
                     },
                     beforeShow: function() {
 
                         $(".bf-img-capcha").off();
-                        new_capcha();
+                        new_capcha(); //set refresh for click image
                         update_capcha();
 
-                        $( "form[data-bf-config]" ).off();
-                        bf_form();
+                        $("form[data-bf-config]").off();
+                        bf_form(config);
 
                     }
                 });
@@ -42,7 +49,7 @@
             $('.bf-img-capcha').attr('src', bf_path + '/core/model/kcaptcha/index.php?' + Math.random())
         }
 
-        function bf_form() {
+        function bf_form(config_popup) {
 
             $('form[data-bf-config]').on('submit', function(e) {
                 e.preventDefault();
@@ -59,18 +66,22 @@
 
                 var form = $(this);
 
-                var config = $(this).data("bf-config");
- 
-                if (typeof config == 'undefined' || config.length < 1) {
-                    config = 'default';
-                } 
+                var config = form.data("bf-config");
+
+                if (typeof config_popup == 'undefined' || config_popup.length < 1) {
+                    if (typeof config == 'undefined' || config.length < 1) {
+                        config = 'default';
+                    }
+                } else {
+                    config = config_popup;
+                }
 
                 $.post(
                     bf_path + "/index.php", {
                         'type': 1,
                         'bf-config': config
                     },
-                    function(data) { 
+                    function(data) {
                         $('[name="bf-config"]').remove();
                         $('[name="bf-token"]').remove();
 
