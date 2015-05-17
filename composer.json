@@ -1,0 +1,12 @@
+{
+    "name": "rugoals/backformer",
+    "description": "Simple ajax contact form",
+    "license": "Apache 2.0",
+    "authors": [
+        {
+            "name": "Rugoals",
+            "email": "rugoals@gmail.com"
+        }
+    ],
+    "require": {}
+}
