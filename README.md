@@ -1,6 +1,6 @@
-#Backformer 2.0
+#Backformer 2.1
 
-Ajax форма обратной связи, легко интегрируемая абсолютно в любую CMS.
+Простая, гибкая Ajax форма обратной связи, легко интегрируемая в любую CMS.
 
 [Сайт](http://rugoals.github.io/backformer)
 
@@ -30,30 +30,27 @@ Ajax форма обратной связи, легко интегрируема
     <link rel="stylesheet" type="text/css" href="/backformer/core/components/fancybox_2.1.5/source/jquery.fancybox.css" media="screen" />
     <!-- // end add fancyBox -->
 
-Плагин jquery для отправки форм [jquery.form.js](https://github.com/malsup/form):
+Для работы надо подключить плагин jquery для отправки форм [jquery.form.js](https://github.com/malsup/form) и сам скрипт:
 
-    <!-- ajax jquery form -->
-    <script src="/backformer/core/components/jquery_form/jquery.form.min.js"></script>
-    <!-- // end ajax jquery form -->
-
-Сам скрипт:
-
-    <!-- back form -->
+    <!-- backformer -->
     <link href="/backformer/core/themes/default.css" type="text/css" rel="stylesheet" />
+    <script src="/backformer/core/components/jquery_form/jquery.form.min.js"></script>
     <script src="/backformer/core/components/backformer.js"></script>
-    <!-- // end back form -->
+    <!-- // end backformer -->
 
 ####Параметры
 
 Для подключения достаточно навесить на форму атрибут **data-bf-config=""** и передать ему название конфигурации.
 
-По умолчанию, при пустом вызове конфигурации, будет браться из папки **/configs/default**. Можно создать сколько угодно конфигураций, просто копируя эту папку с другим названием.  
+По умолчанию, при пустом вызове конфигурации, будет браться из папки **/configs/default**. Можно создать сколько угодно конфигураций, просто копируя папку **default** с другим названием.  
+
+Поддерживается наследование конфигураций. Например в новой можно не указывать почту получателя, она возьмётся из папки - **default**.
 
 ####Что внутри
 
 * config.php - конфигурационный файл.
-* report.html - шаблон отправки на почту. В качестве шаблона для полей используется конструкция **[+название_поля+]** 
-* form.html - форма в всплывающем окне fancybox.
+* /templates/report.html - шаблон отправки на почту. В качестве шаблона для полей используется конструкция **{{название_поля}}**. Работает с использованием шаблонизатора Twig.
+* /templates/form.html - форма в всплывающем окне fancybox.
 
 ###2. Пример вызова формы
 
