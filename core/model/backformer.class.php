@@ -12,15 +12,15 @@ class Backformer {
 	private function set_default_config($config, $lang) {
 
  		if(empty($config['subject'])) {
- 			$config['subject'] = $lang['main']['subject'].$_SERVER['SERVER_NAME'];
+ 			$config['subject'] = $lang['main']['subject'];
  		}
 
  		if(empty($config['from_email'])) {
- 			$config['from_email'] = $lang['main']['from_email'].$_SERVER['SERVER_NAME'];
+ 			$config['from_email'] = $lang['main']['from_email'];
  		}
 
- 		if(empty($config['from_email'])) {
- 			$config['from_name'] = $lang['main']['from_name'].$_SERVER['SERVER_NAME'];
+ 		if(empty($config['from_name'])) {
+ 			$config['from_name'] = $lang['main']['from_name'];
  		}
 
 		return $config;
@@ -28,25 +28,26 @@ class Backformer {
 
 	public function send() {
 
-		$type = isset($_POST['type']) ? intval($_POST['type']) : 0;
+		$type = isset($_REQUEST['type']) ? preg_replace ("/[^a-z]/i","", $_REQUEST['type']) : 'default';
 
 		$out = array();  
 
  		switch ($type) {
-
-			case 0:
-    			$out = $this->set_form_data();
-    		break;
-
-			case 1:
-    			$out = $this->set_token();
+			case 'form':
+    		 	$out = $this->set_ajax_form();
     		break; 
-			
-			default: break;
-		} 
-		return $this->set_json_encode($out);
-	}
 
+    		case 'token':
+    			$out = $this->set_json_encode($this->set_token());
+    		break;
+			
+			default:  
+				$out = $this->set_json_encode($this->set_form_data());
+			break;
+		} 
+		return $out;
+	}
+ 
 	private function set_token() {
 		$bf_token = md5(uniqid());
 		$_SESSION['bf-token'] = $bf_token;
@@ -56,12 +57,13 @@ class Backformer {
 	private function set_form_data() {
 
 		$out = array();
- 
+ 		$field = array();
+ 		
 		foreach ($_POST as $key => $value) {
 			if(is_array($value)) {
-				$info[$key] = implode(', ',$value);
+				$field[$key] = implode(', ',$value);
 			} else {
-				$info[$key] = $value;
+				$field[$key] = $value;
 			}
 		}
 
@@ -73,7 +75,7 @@ class Backformer {
 
 			if(!empty($to)) {
  
-					$body = $this->parser_template('configs/'.$this->config['name'].'/report.html', $info); 
+					$body = $this->set_report_form($field);
 
 					if($this->set_mail($body)) {
 						$out = $this->set_form_data_status(1, $this->lang['main']['success_email_send']);
@@ -89,6 +91,21 @@ class Backformer {
  		}
 
 		return $out;
+	}
+
+	private function set_report_form($field =  array()) {
+		require_once(PATH_BACKFORMER.'core/libraries/Twig-1.18.1/lib/Twig/Autoloader.php');
+		Twig_Autoloader::register(true);
+
+		$loader = new Twig_Loader_Filesystem('configs/'.$this->config['name'].'/templates/');
+ 
+		$twig = new Twig_Environment($loader);
+ 
+		return $twig->render('report.html', $field);
+	}
+
+	private function set_ajax_form() {
+ 		return file_get_contents('configs/'.$this->config['name'].'/templates/form.html');
 	}
 
 	private function set_form_data_status($status = 0, $value = '') {
@@ -138,7 +155,6 @@ class Backformer {
 		return $out;
 	}
 
-
 	private function check_capcha() {
 		$out = '';
 
@@ -156,7 +172,7 @@ class Backformer {
 	private function check_spam() {
 		$out = '';
 
-		if($this->_checked_ajax()) { 
+		if($this->checked_ajax()) { 
 		} else {
 			$out = $this->set_form_data_status(0, $this->lang['err']['spam']);
 		}
@@ -173,7 +189,7 @@ class Backformer {
 		return $out;
 	}
 
-	private function _checked_ajax() {
+	private function checked_ajax() {
   		return isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
   		 strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 	}
@@ -196,7 +212,7 @@ class Backformer {
 
 	protected function set_mail($body = '') {
 
-		require_once PATH_BACKFORMER.'core/model/PHPMailer/class.phpmailer.php';
+		require_once PATH_BACKFORMER.'core/libraries/PHPMailer/class.phpmailer.php';
 		$mail = new PHPMailer();
 
 		$mail->CharSet = 'utf-8';
@@ -239,15 +255,6 @@ class Backformer {
 		}
 	
 		return $mail->send();
-	}
- 
-	protected function parser_template($path, $placeholder) {
-		$chunk = file_get_contents(PATH_BACKFORMER.$path);
-		foreach ($placeholder as $k => $v){
-			$chunk = str_replace("[+".$k."+]", $v, $chunk);
-		}
-		$chunk = preg_replace('/\[\+[0-9a-zA-Z]*\+\]/i', '-', $chunk);
-		return $chunk;
 	}
 
 	protected function set_json_encode($value) {

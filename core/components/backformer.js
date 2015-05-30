@@ -5,13 +5,16 @@
 
         var bf_path = '/backformer';
         bf_form(); //init form
-        new_capcha();
+        bind_event_capcha();
 
-        //update capcha
-        function new_capcha() {
+        function bind_event_capcha() {
             $(".bf-img-capcha").on("click", function() {
                 update_capcha();
             });
+        }
+
+        function update_capcha() {
+            $('.bf-img-capcha').attr('src', bf_path + '/captcha.php?' + Math.random())
         }
 
         //init popup windows
@@ -28,12 +31,12 @@
                 $.fancybox({
                     type: 'ajax',
                     beforeLoad: function() {
-                        this.href = bf_path + '/configs/' + config + '/form.html';
+                        this.href = bf_path + '/index.php?bf-config=' + config + '&type=form';
                     },
                     beforeShow: function() {
 
                         $(".bf-img-capcha").off();
-                        new_capcha(); //set refresh for click image
+                        bind_event_capcha(); //set refresh for click image
                         update_capcha();
 
                         $("form[data-bf-config]").off();
@@ -43,12 +46,7 @@
                 });
             }
         });
-
-        function update_capcha() {
-            $.post(bf_path + "/core/model/kcaptcha/index.php");
-            $('.bf-img-capcha').attr('src', bf_path + '/core/model/kcaptcha/index.php?' + Math.random())
-        }
-
+ 
         function bf_form(config_popup) {
 
             $('form[data-bf-config]').on('submit', function(e) {
@@ -78,7 +76,7 @@
 
                 $.post(
                     bf_path + "/index.php", {
-                        'type': 1,
+                        'type': 'token',
                         'bf-config': config
                     },
                     function(data) {

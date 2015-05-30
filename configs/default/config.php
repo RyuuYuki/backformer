@@ -4,13 +4,7 @@
 * Почта получателей, через запятую
 * Пример:  'email@example.com, add_email@example.com' или просто 'email@example.com'
 ***/
-$config['to'] = 'rugoals@gmail.com';
-/***
-* Поля обязательные для заполнения.
-* Пример: 'name,email,phone'
-* Где, например, phone — это значение атрибута 'name' тега <input>.
-***/
-$config['need_field'] = 'name,phone';
+$config['to'] = '';
 /***
 * Заголовок письма.
 * Пример: 'Сообщение из формы связи example.com'
@@ -27,6 +21,12 @@ $config['from_email'] = '';
 ***/
 $config['from_name'] = '';
 /***
+* Поля обязательные для заполнения.
+* Пример: 'name,email,phone'
+* Где, например, phone — это значение атрибута 'name' тега <input>.
+***/
+$config['required_field'] = 'name,phone';
+/***
 * локализация
 ***/
 $config['used_lang'] = 'ru';
@@ -35,7 +35,6 @@ $config['used_lang'] = 'ru';
 * capcha - проверяет капчу;
 * spam - защита от спама, csrf;
 * empty_field - проверка на пустые поля, заполненные в параметре - 'need_field';
-* Пример: 'capcha,spam,empty_field'.
+* Пример: 'capcha,spam,required_field'.
 ***/
-$config['error_type'] = 'spam,empty_field';
-
+$config['error_type'] = 'spam,required_field'; 

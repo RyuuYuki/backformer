@@ -9,10 +9,10 @@ $lang['err'] = array(
 );
 
 $lang['main'] = array(
-	'subject' => 'Письмо с сайта ',
+	'subject' => 'Письмо с сайта',
 	'success_email_send' => 'Спасибо, сообщение принято!',
-	'from_name' => 'Из ',
-	'from_email' => 'nobody@'
+	'from_name' => 'Из '.$_SERVER['SERVER_NAME'],
+	'from_email' => 'nobody@'.$_SERVER['SERVER_NAME']
 );
 
 $lang['report'] = array(
