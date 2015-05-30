@@ -138,8 +138,8 @@ class Backformer {
     					$err = $this->check_spam(); 
     				break; 
 
-    				case 'empty_field':
-    					$err = $this->check_empty_field();
+    				case 'required_field':
+    					$err = $this->check_required_field();
     				break; 
 
 					default: break;
@@ -194,16 +194,16 @@ class Backformer {
   		 strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 	}
 
-	private function check_empty_field() {
+	private function check_required_field() {
 		$out = '';
 
-		if(!empty($this->config['need_field'])) {
-			$this->config['need_field'] = explode(',', $this->config['need_field']);
+		if(!empty($this->config['required_field'])) {
+			$this->config['required_field'] = explode(',', $this->config['required_field']);
 
-			foreach ($this->config['need_field'] as $value) {
+			foreach ($this->config['required_field'] as $value) {
 				$current = isset($_POST[trim($value)]) ? trim($_POST[trim($value)]) : '';
 				if(!isset($_POST[trim($value)]) || empty($current)) {
-					$out = $this->set_form_data_status(0, $this->lang['err']['empty_field']);
+					$out = $this->set_form_data_status(0, $this->lang['err']['required_field']);
 				}
 			} 
 		}

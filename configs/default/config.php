@@ -34,7 +34,7 @@ $config['used_lang'] = 'ru';
 * Типы проверяемых ошибок.
 * capcha - проверяет капчу;
 * spam - защита от спама, csrf;
-* empty_field - проверка на пустые поля, заполненные в параметре - 'need_field';
+* required_field - проверка на пустые поля, заполненные в параметре - 'need_field';
 * Пример: 'capcha,spam,required_field'.
 ***/
 $config['error_type'] = 'spam,required_field'; 
