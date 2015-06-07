@@ -4,11 +4,66 @@
     $(function() {
 
         var bf_path = '/backformer';
-        bf_form(); //init form
+
         bind_event_capcha();
+        bind_event_popup();
+        init_form();
+
+        function bind_event_popup() {
+            $('[data-bf-config]').on("click", function(e) {
+                e.preventDefault();
+
+                var config = $(this).data("bf-config");
+
+                if (typeof config == 'undefined' || config.length < 1) {
+                    config = 'default';
+                }
+
+                $.ajax({
+                    url: bf_path + '/index.php',
+                    data: {
+                        'bf-config': config,
+                        'type': "form"
+                    },
+                    method: "post",
+                    dataType: "html",
+                    beforeSend: function(xhr) {
+                        $('body').append('<div class="bf-loading"></div>');
+                    },
+                    success: function(xhr) {
+
+                        $('body').append(xhr);
+                        $('.bf-loading').remove();
+
+                        $('.bf-fixed-overlay').show();
+
+                        $(".bf-img-capcha").off();
+                        bind_event_capcha(); //set refresh for click image
+                        update_capcha();
+
+                        $("form[data-bf-config]").off();
+                        init_form(config);
+                        bind_close_popup();
+                    }
+                })
+            });
+
+            $('form[data-bf-config]').off();
+        }
+
+        function bind_close_popup() {
+            $(".bf-modal-close, .bf-fixed-overlay").on("click", function() {
+                $(".bf-fixed-overlay").remove();
+            });
+
+            $(".bf-modal").on("click", function(e) {
+                e.stopImmediatePropagation();
+            });
+
+        }
 
         function bind_event_capcha() {
-            $(".bf-img-capcha").on("click", function() {
+            $("[src*='captcha.php']").on("click", function() {
                 update_capcha();
             });
         }
@@ -17,49 +72,16 @@
             $('.bf-img-capcha').attr('src', bf_path + '/captcha.php?' + Math.random())
         }
 
-        //init popup windows
-        $('[data-bf-init="popup"]').on("click", function(e) {
-            e.preventDefault();
-            if (typeof $('[data-bf-init="popup"]').fancybox == 'function') {
-
-                var config = $(this).data("bf-config");
-
-                if (typeof config == 'undefined' || config.length < 1) {
-                    config = 'default';
-                }
-
-                $.fancybox({
-                    type: 'ajax',
-                    beforeLoad: function() {
-                        this.href = bf_path + '/index.php?bf-config=' + config + '&type=form';
-                    },
-                    beforeShow: function() {
-
-                        $(".bf-img-capcha").off();
-                        bind_event_capcha(); //set refresh for click image
-                        update_capcha();
-
-                        $("form[data-bf-config]").off();
-                        bf_form(config);
-
-                    }
-                });
-            }
-        });
- 
-        function bf_form(config_popup) {
+        function init_form(config_popup) {
 
             $('form[data-bf-config]').on('submit', function(e) {
                 e.preventDefault();
 
                 var options = {
-                    beforeSubmit: showRequest, // pre-submit callback 
                     success: showResponse, // post-submit callback  
-                    url: bf_path + '/index.php', // override for form's 'action' attribute 
-                    type: 'post', // 'get' or 'post', override for form's 'method' attribute 
-                    dataType: 'json', // 'xml', 'script', or 'json' (expected server response type)  
-                    //$.ajax options can be used here too, for example: 
-                    //timeout:   3000 
+                    url: bf_path + '/index.php',
+                    type: 'post',
+                    dataType: 'json'
                 };
 
                 var form = $(this);
@@ -94,13 +116,6 @@
             });
         }
 
-        // pre-submit callback 
-        function showRequest(formData, jqForm, options) {
-            //var queryString = $.param(formData);
-            return true;
-        }
-
-        // post-submit callback 
         function showResponse(responseText, statusText, xhr, $form) {
 
             $('.bf-status ').remove();
@@ -112,14 +127,14 @@
 
                 setTimeout(
                     function() {
-                        $('.fancybox-close').click(); //if popup
+                        $('.bf-modal-close').click(); //if popup
                     }, 2000
                 );
 
                 setTimeout(
                     function() {
                         $form.show();
-                        $('.bf-status ').remove();
+                        $('.bf-status').remove();
                         $form.clearForm();
                     }, 3000
                 );

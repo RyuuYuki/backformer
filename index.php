@@ -6,7 +6,7 @@
 * @author Rugoals <rugoasl@gmail.com>
 * @license Apache 2.0
 * @link https://github.com/Rugoals/backformer/
-* @version 2.1
+* @version 2.2
 */
 
 $debug = 0;

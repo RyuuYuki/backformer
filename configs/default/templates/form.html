@@ -1,32 +1,40 @@
-<div class="bf-content-inline">
-    <div class="bf-header">
-        Форма отправки сообщения!
-    </div>
-    <form data-bf-config="" action="" method="post">
-        <div class="bf-row">
-            <label>Имя:</label>
-            <input required="required" name="name" placeholder="Обязательное поле" type="text" value="" />
-        </div>
-        <div class="bf-row">
-            <label>Телефон:</label>
-            <input required="required" name="phone" placeholder="Обязательное поле" type="text" value="" />
-        </div>
-        <div class="bf-row">
-            <label>Комментарий:</label>
-            <textarea cols="40" rows="10" name="comment"></textarea>
-        </div>
-        <div class="bf-row">
-            <label>Прикрепить файлы:</label>
-            <input multiple="multiple" name="upload_file[]" type="file" />
-        </div>
-        <div class="bf-row">
-            <div class="bf-info-img">
-                <img width="110" height="60" title="Обновить картинку" class="bf-img-capcha" src="/backformer/captcha.php" alt="" />
+<div class="bf-fixed-overlay bf-fixed-overlay__modal">
+    <div class="bf-modal">
+        <div class="bf-modal_container">
+            <a href="javascript:;" class="bf-modal-close" title="Закрыть"></a>
+        
+            <div class="bf-content-inline">
+                <div class="bf-header">
+                    Форма отправки сообщения!
+                </div>
+                <form data-bf-config="" action="" method="post">
+                    <div class="bf-row">
+                        <label>Имя:</label>
+                        <input required="required" name="name" placeholder="Обязательное поле" type="text" value="" />
+                    </div>
+                    <div class="bf-row">
+                        <label>Телефон:</label>
+                        <input required="required" name="phone" placeholder="Обязательное поле" type="text" value="" />
+                    </div>
+                    <div class="bf-row">
+                        <label>Комментарий:</label>
+                        <textarea cols="40" rows="10" name="comment"></textarea>
+                    </div>
+                    <div class="bf-row">
+                        <label>Прикрепить файлы:</label>
+                        <input multiple="multiple" name="upload_file[]" type="file" />
+                    </div>
+                    <div class="bf-row">
+                        <div class="bf-info-img">
+                            <img width="110" height="60" title="Обновить картинку" class="bf-img-capcha" src="/backformer/captcha.php" alt="" />
+                        </div>
+                        <input class="capcha" name="capcha" placeholder="Код с картинки" type="text" value="" />
+                    </div>
+                    <div class="bf-submit">
+                        <input class="bf-button" name="submit" type="submit" value="Отправить" />
+                    </div>
+                </form>
             </div>
-            <input class="capcha" name="capcha" placeholder="Код с картинки" type="text" value="" />
         </div>
-        <div class="bf-submit">
-            <input class="bf-button" name="submit" type="submit" value="Отправить" />
-        </div>
-    </form>
+    </div>
 </div>

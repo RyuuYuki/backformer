@@ -34,6 +34,7 @@ class Backformer {
 
  		switch ($type) {
 			case 'form':
+			
     		 	$out = $this->set_ajax_form();
     		break; 
 
