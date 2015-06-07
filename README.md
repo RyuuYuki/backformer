@@ -2,7 +2,7 @@
 
 Простая, гибкая Ajax форма обратной связи, легко интегрируемая в любую CMS.
 
-* [Скачать](https://github.com/Rugoals/backformer/archive/2.2.0.zip)
+* [Скачать](https://github.com/Rugoals/backformer/archive/2.2.1.zip)
 * [Сайт](http://rugoals.github.io/backformer)
 * [Старые версии](https://github.com/Rugoals/backformer/wiki)
 
