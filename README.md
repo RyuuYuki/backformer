@@ -1,8 +1,10 @@
-#Backformer 2.1
+#Backformer 2.2
 
 Простая, гибкая Ajax форма обратной связи, легко интегрируемая в любую CMS.
 
-[Сайт](http://rugoals.github.io/backformer), [Скачать](https://github.com/Rugoals/backformer/archive/2.1.1.zip)
+* [Скачать](https://github.com/Rugoals/backformer/archive/2.2.0.zip)
+* [Сайт](http://rugoals.github.io/backformer)
+* [Старые версии](https://github.com/Rugoals/backformer/wiki)
 
 ##Достоинства
 * Возможность отправки через ajax любых форм.
@@ -11,47 +13,35 @@
 * Защита от спама, CSRF.
 * Поддержка работы с несколькими формами на одной странице.
 * Поддержка локализаций.
-* Поддержка всплывающих окон Fancybox.
-
-##Системные требования
-* PHP5 >= 5.2.0
-* Jquery >= 1.7
+* Поддержка всплывающих окон (ie7+).
 
 ## Как подключить
 
 ###1. Подключить скрипты в указанной последовательности
 
-Для работы формы потребуется jquery:
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     
-Опционально, [галерея fancyBox](https://github.com/fancyapps/fancyBox) для модальных окон:
-
-    <!-- Add fancyBox main JS and CSS files -->
-    <script type="text/javascript" src="/backformer/core/components/fancybox_2.1.5/source/jquery.fancybox.pack.js">
-    </script>
-    <link rel="stylesheet" type="text/css" href="/backformer/core/components/fancybox_2.1.5/source/jquery.fancybox.css" media="screen" />
-    <!-- // end add fancyBox -->
-
-Для работы надо подключить плагин jquery для отправки форм [jquery.form.js](https://github.com/malsup/form) и сам скрипт:
-
     <!-- backformer -->
-    <link href="/backformer/core/themes/default.css" type="text/css" rel="stylesheet" />
-    <script src="/backformer/core/components/jquery_form/jquery.form.min.js"></script>
+    <link href="/backformer/core/themes/default/bf.css" type="text/css" rel="stylesheet" />
+    <script src="/backformer/core/components/jquery_form/jquery.form.min.js"></script> 
     <script src="/backformer/core/components/backformer.js"></script>
-    <!-- // end backformer -->
+    <!-- // backformer -->
 
-####Параметры
+###2. Вызов для встроенной формы на странице
 
 Для подключения достаточно навесить на форму атрибут **data-bf-config=""** и передать ему название конфигурации.
-
+ 
 По умолчанию, при пустом вызове конфигурации, будет браться из папки **/configs/default**. Можно создать сколько угодно конфигураций, просто копируя папку **default** с другим названием.  
 
 Поддерживается наследование конфигураций. Например в новой можно не указывать почту получателя, она возьмётся из папки - **default**.
 
+###3. Вызов всплывающего окна
+
+Нужно навесить атрибут **data-bf-config=""** на любой тег, кроме формы, по нажатию на который ожидается вызов всплывающего окна.
+
 ####Что внутри
 
-* config.php - конфигурационный файл.
+* config.php - конфигурационный файл. Внутри него комментарии для настройки.
 * /templates/report.html - шаблон отправки на почту. В качестве шаблона для полей используется конструкция **{{название_поля}}**. Работает с использованием шаблонизатора Twig.
 * /templates/form.html - форма в всплывающем окне fancybox.
 
@@ -90,13 +80,11 @@
         </form>
     </div>
 
+##Системные требования
 
+* PHP5 >= 5.2.0
+* Jquery >= 1.7
 
-###3. Пример вывоза всплывающего окна Fancybox
-
-Для создания всплывающего окна достаточно присвоить атрибут **data-bf-init="popup"** ссылке или кнопке, а также указать конфигурацию data-bf-config="".
-
-	<a data-bf-init="popup" data-bf-config="" href="#">Модальное окно</a>
 
  
  
