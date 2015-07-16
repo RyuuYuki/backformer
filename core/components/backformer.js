@@ -20,7 +20,7 @@
                 }
 
                 $.ajax({
-                    url: bf_path + '/index.php',
+                    url: bf_path + '/init.php',
                     data: {
                         'bf-config': config,
                         'type': "form"
@@ -79,7 +79,7 @@
 
                 var options = {
                     success: showResponse, // post-submit callback  
-                    url: bf_path + '/index.php',
+                    url: bf_path + '/init.php',
                     type: 'post',
                     dataType: 'json'
                 };
@@ -97,7 +97,7 @@
                 }
 
                 $.post(
-                    bf_path + "/index.php", {
+                    bf_path + "/init.php", {
                         'type': 'token',
                         'bf-config': config
                     },

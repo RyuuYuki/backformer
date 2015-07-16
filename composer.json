@@ -1,5 +1,5 @@
 {
-    "name": "rugoals/backformer",
+    "name": "Rugoals/backformer",
     "description": "Simple ajax contact form",
     "license": "Apache 2.0",
     "authors": [
@@ -8,5 +8,7 @@
             "email": "rugoals@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=5.2"
+    },
 }

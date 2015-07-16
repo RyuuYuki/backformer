@@ -190,9 +190,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-image: url('fancybox_overlay.png');
-    -pie-png-fix: true;
-    behavior: url('PIE.htc');
+    background-image: url('overlay.png');
 }
 
 .bf-fixed-overlay__modal {

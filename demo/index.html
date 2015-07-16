@@ -8,7 +8,7 @@
     
     <!-- ajax jquery form -->
     <link href="/backformer/core/themes/default/bf.css" type="text/css" rel="stylesheet" />
-    <script src="/backformer/core/components/jquery_form/jquery.form.min.js"></script> 
+    <script src="/backformer/core/components/jquery.form.min.js"></script> 
     <script src="/backformer/core/components/backformer.js"></script>
     <!-- // end back form -->
 </head>
@@ -21,7 +21,7 @@
         <div class="bf-header">
             Форма отправки сообщения!
         </div>
-        <form data-bf-config="phone" action="" method="post">
+        <form enctype="multipart/form-data" data-bf-config="phone" action="" method="post">
             <div class="bf-row">
                 <label>Имя:</label>
                 <input required="required" name="name" placeholder="Обязательное поле" type="text" value="" />
