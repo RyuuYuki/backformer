@@ -68,7 +68,7 @@
     border-radius: 5px;
     color: #fff;
     max-width: 400px;
-    margin: 5px 0;
+    margin: 10px auto;
     padding: 10px 0;
     text-align: center;
     width: 100%;
@@ -190,6 +190,7 @@
     top: 0;
     width: 100%;
     height: 100%;
+    z-index: 99;
     background-image: url('overlay.png');
 }
 
