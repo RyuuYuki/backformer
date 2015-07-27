@@ -1,10 +1,10 @@
 <?php
 
-class Backformer {
+class Backformer extends Events  {
 
-	protected $config, $lang; 
+	protected $config, $lang, $field; 
 
-	function __construct($config, $lang) {
+	function __construct($config = array(), $lang = array()) {
 		$this->config = $this->set_default_config($config, $lang);
 		$this->lang = $lang;
 	}
@@ -26,8 +26,8 @@ class Backformer {
 		return $config;
 	}
 
-	public function send() {
-
+	public function init() {
+ 
 		$type = isset($_REQUEST['type']) ? preg_replace ("/[^a-z]/i","", $_REQUEST['type']) : 'default';
 
 		$out = array();  
@@ -67,16 +67,19 @@ class Backformer {
 				$field[$key] = $value;
 			}
 		}
+		$this->field = $field;
 
 		$error = $this->check_error();
-
 		if(empty($error)) {
 
-			$to = $this->config['to'];
+			$this->before_success_send_form($field);
 
-			if(!empty($to)) {
- 
-					$body = $this->set_report_form($field);
+			$to = $this->config['to'];
+			$mail_send = $this->config['mail_send'];
+
+			if(!empty($mail_send)) {
+				if(!empty($to)) {
+					$body = $this->set_report_form();
 
 					if($this->set_mail($body)) {
 						$out = $this->set_form_data_status(1, $this->lang['main']['success_email_send']);
@@ -84,9 +87,15 @@ class Backformer {
 						$out = $this->set_form_data_status(0, $this->lang['err']['email_send']);
 					}
 
+				} else {
+					$out = $this->set_form_data_status(0, $this->lang['err']['not_email']);
+				}
 			} else {
-				$out = $this->set_form_data_status(0, $this->lang['err']['not_email']);
+				$out = $this->set_form_data_status(1, $this->lang['main']['success_email_send']);
 			}
+
+			$this->after_success_send_form();
+
  		} else {
  			$out = $error;
  		}
@@ -94,15 +103,12 @@ class Backformer {
 		return $out;
 	}
 
-	private function set_report_form($field =  array()) {
-		require_once(PATH_BACKFORMER.'core/libraries/Twig-1.18.1/lib/Twig/Autoloader.php');
+	private function set_report_form() {
+ 
 		Twig_Autoloader::register(true);
-
 		$loader = new Twig_Loader_Filesystem('configs/'.$this->config['name'].'/templates/');
- 
 		$twig = new Twig_Environment($loader);
- 
-		return $twig->render('report.html', $field);
+		return $twig->render('report.html', $this->field);
 	}
 
 	private function set_ajax_form() {
@@ -159,10 +165,9 @@ class Backformer {
 	private function check_capcha() {
 		$out = '';
 
-		$capcha = isset($_POST['capcha']) ? $_POST['capcha'] : '';
 		$_SESSION['captcha_keystring'] = isset($_SESSION['captcha_keystring']) ? $_SESSION['captcha_keystring'] : '';
 		
-		if(strcmp($_SESSION['captcha_keystring'], $capcha) == 0){
+		if(strcmp($_SESSION['captcha_keystring'], $this->field['capcha']) == 0){
 			
 		} else {
 			 $out = $this->set_form_data_status(0, $this->lang['err']['capcha']);

@@ -38,3 +38,7 @@ $config['used_lang'] = 'ru';
 * Пример: 'capcha,spam,required_field'.
 ***/
 $config['error_type'] = 'spam,required_field'; 
+/***
+* Оправлять почту или нет, по умолчанию [1] - отправлять, [0] - не отправлять.
+***/
+$config['mail_send'] = 1; 
