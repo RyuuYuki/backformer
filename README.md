@@ -51,7 +51,7 @@
 * /templates/form.html - форма для всплывающего окна.
 * /model/events.class.php - php-класс, расширяющий функционал формы.
 
-###№№5. Пример вызова формы
+#####5. Пример вызова формы
 
     <div class="bf-content-inline">
     <div class="bf-header">
