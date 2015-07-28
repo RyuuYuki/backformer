@@ -2,11 +2,13 @@
 
 Простая, гибкая Ajax форма обратной связи, легко интегрируемая в любую CMS.
 
-* [Скачать](https://github.com/Rugoals/backformer/archive/2.3.0.zip)
-* [Сайт](http://rugoals.github.io/backformer)
+* [Скачать](https://github.com/Rugoals/backformer/archive/2.4.0.zip)
+* [Установка](https://github.com/Rugoals/backformer/#install)
+* [Настройка](https://github.com/Rugoals/backformer/#custom)
 * [Старые версии](https://github.com/Rugoals/backformer/wiki)
 
-##Достоинства
+
+###Достоинства
 * Возможность отправки через ajax любых форм.
 * Поддержка капчи.
 * Поддержка прикрепления к письму нескольких файлов.
@@ -15,12 +17,11 @@
 * Поддержка локализаций.
 * Поддержка всплывающих окон (ie7+).
 
-##Системные требования
-
+###Системные требования
 * PHP5 >= 5.2.0
 * Jquery >= 1.7
 
-## Как подключить
+## Как подключить {#install}
 
 ###1. Подключить скрипты в указанной последовательности
 
