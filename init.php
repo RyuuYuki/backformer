@@ -6,10 +6,10 @@
 * @author Rugoals <rugoasl@gmail.com>
 * @license Apache 2.0
 * @link https://github.com/Rugoals/backformer/
-* @version 2.4
+* @version 2.5
 */
 
-$debug = 0;
+$debug = 1;
 
 if($debug > 0) {
 	ini_set('error_reporting', E_ALL);

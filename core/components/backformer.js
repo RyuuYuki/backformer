@@ -24,6 +24,8 @@
                         config = 'default';
                     }
 
+                    var button = $(this);
+
                     $.ajax({
                         url: bf_path + '/init.php',
                         data: {
@@ -39,8 +41,9 @@
 
                             $('body').append(xhr);
                             $('.bf-loading').remove();
-
                             $('.bf-fixed-overlay').show();
+
+                            bf.bind_custom_popup_params(button);
 
                             $(".bf-img-capcha").off();
                             bf.bind_event_capcha(); //set refresh for click image
@@ -54,6 +57,18 @@
                 });
 
                 $('form[data-bf-config]').off();
+            },
+            bind_custom_popup_params: function(button) {
+                button.attributes;
+                console.log(button.attr('href'));
+                 /*
+                    var arr;
+                    arr = $.map(button.attributes, function(attribute) {
+                        return attribute.name + ' = ' + attribute.value;
+                    });
+                    alert(arr);
+                    */
+                
             },
             bind_close_popup: function() {
                 $(".bf-modal-close, .bf-fixed-overlay").on("click", function() {
