@@ -43,14 +43,13 @@
                             $('.bf-loading').remove();
                             $('.bf-fixed-overlay').show();
 
-                            bf.bind_custom_popup_params(button);
-
                             $(".bf-img-capcha").off();
                             bf.bind_event_capcha(); //set refresh for click image
                             bf.update_capcha();
 
                             $("form[data-bf-config]").off();
-                            bf.init_form(config);
+
+                            bf.init_form(config, bf.bind_custom_popup_params(button));
                             bf.bind_close_popup();
                         }
                     })
@@ -59,16 +58,21 @@
                 $('form[data-bf-config]').off();
             },
             bind_custom_popup_params: function(button) {
-                button.attributes;
-                console.log(button.attr('href'));
-                 /*
-                    var arr;
-                    arr = $.map(button.attributes, function(attribute) {
-                        return attribute.name + ' = ' + attribute.value;
+
+                var attributes = {};
+                var attr_el = '';
+
+                if (button.length) {
+                    $.each(button[0].attributes, function(index, attr) {
+                        attr_el = attr.name;
+                        if (/data\-bf\-field/.test(attr_el)) {
+                            attr_el = attr_el.replace('data-bf-field-', '');
+                            attributes[attr_el] = attr.value;
+                        }
                     });
-                    alert(arr);
-                    */
-                
+                }
+                return attributes;
+
             },
             bind_close_popup: function() {
                 $(".bf-modal-close, .bf-fixed-overlay").on("click", function() {
@@ -87,7 +91,7 @@
             update_capcha: function() {
                 $("[src*='captcha.php']").attr('src', bf_path + '/captcha.php?' + Math.random())
             },
-            init_form: function(config_popup) {
+            init_form: function(config_popup, attributes) {
 
                 $('form[data-bf-config]').on('submit', function(e) {
                     e.preventDefault();
@@ -119,6 +123,10 @@
                         function(data) {
                             $('[name="bf-config"]').remove();
                             $('[name="bf-token"]').remove();
+
+                            $.each(attributes, function(i, val) {
+                                form.append('<input name="' + i + '" type="hidden" value="' + val + '" />');
+                            });
 
                             //set config
                             form.append('<input name="bf-config" type="hidden" value="' + config + '" />');
