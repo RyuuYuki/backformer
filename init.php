@@ -3,13 +3,13 @@
 /**
 * Backformer - Simple, flexible ajax webform.
 *
-* @author Rugoals <rugoasl@gmail.com>
+* @author Rugoals <rugoals@gmail.com>
 * @license Apache 2.0
 * @link https://github.com/Rugoals/backformer/
 * @version 2.5
 */
 
-$debug = 1;
+$debug = 0;
 
 if($debug > 0) {
 	ini_set('error_reporting', E_ALL);

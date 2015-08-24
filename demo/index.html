@@ -5,23 +5,24 @@
     <meta charset="UTF-8">
     <title>Форма</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    
     <!-- ajax jquery form -->
     <link href="/backformer/core/themes/default/bf.css" type="text/css" rel="stylesheet" />
-    <script src="/backformer/core/components/jquery.form.min.js"></script> 
+    <script src="/backformer/core/components/jquery.form.min.js"></script>
     <script src="/backformer/core/components/backformer.js"></script>
     <!-- // end back form -->
 </head>
 
 <body>
+    <h1>Демонстрация работы</h1>
     <a data-bf-config="" href="#">Модальное окно</a>
     <hr />
-
+    <a data-bf-field-title="Первый параметр" data-bf-field-count="Второй параметр" data-bf-config="" href="#">Модальное окно с параметрами</a>
+    <hr />
     <div class="bf-content-inline">
         <div class="bf-header">
             Форма отправки сообщения!
         </div>
-        <form enctype="multipart/form-data" data-bf-config="phone" action="" method="post">
+        <form data-bf-config="" action="" method="post">
             <div class="bf-row">
                 <label>Имя:</label>
                 <input required="required" name="name" placeholder="Обязательное поле" type="text" value="" />
@@ -31,8 +32,12 @@
                 <input required="required" name="phone" placeholder="Обязательное поле" type="text" value="" />
             </div>
             <div class="bf-row">
+                <label>Email:</label>
+                <input required="required" name="Email" placeholder="Обязательное поле" type="email" value="" />
+            </div>
+            <div class="bf-row">
                 <label>Комментарий:</label>
-                <textarea cols="40" rows="10" name="comment"></textarea>
+                <textarea cols="40" rows="8" name="comment"></textarea>
             </div>
             <div class="bf-row">
                 <label>Прикрепить файлы:</label>
@@ -40,7 +45,7 @@
             </div>
             <div class="bf-row">
                 <div class="bf-info-img">
-                    <img title="Обновить картинку" src="/backformer/captcha.php" alt="" />
+                    <img width="110" height="60" title="Обновить картинку" class="bf-img-capcha" src="/backformer/captcha.php" alt="" />
                 </div>
                 <input class="capcha" name="capcha" placeholder="Код с картинки" type="text" value="" />
             </div>
@@ -49,7 +54,6 @@
             </div>
         </form>
     </div>
- 
 </body>
 
 </html>

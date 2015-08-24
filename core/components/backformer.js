@@ -1,3 +1,12 @@
+/**
+ * Backformer - Simple, flexible ajax webform.
+ *
+ * @author Rugoals <rugoals@gmail.com>
+ * @license Apache 2.0
+ * @link https://github.com/Rugoals/backformer/
+ * @version 2.5
+ */
+
 //jQuery.noConflict();
 
 (function($) {
@@ -124,9 +133,18 @@
                             $('[name="bf-config"]').remove();
                             $('[name="bf-token"]').remove();
 
-                            $.each(attributes, function(i, val) {
-                                form.append('<input name="' + i + '" type="hidden" value="' + val + '" />');
-                            });
+                            //add custom field
+                            if (typeof attributes == 'undefined' || attributes.length < 1) {} else {
+                                $.each(attributes, function(i, val) {
+                                    form.append('<input name="' + i + '" type="hidden" value="' + val + '" />');
+                                });
+                            }
+
+                            //add page info
+                            if (typeof attributes == 'undefined' || attributes.length < 1) {} else {
+                                form.append('<input name="bf_page_h1" type="hidden" value="' + $('h1').html() + '" />');
+                            }
+                            form.append('<input name="bf_page_link" type="hidden" value="' + document.location.href + '" />');
 
                             //set config
                             form.append('<input name="bf-config" type="hidden" value="' + config + '" />');

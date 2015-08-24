@@ -1,11 +1,15 @@
 <h2>Сообщение с сайта:</h2>
-
+ 
 {% if name is not empty %}
 	<p><b>Имя: </b>{{name}}</p>
 {% endif %}
 
 {% if phone is not empty %}
 	<p><b>Телефон: </b>{{phone}}</p>
+{% endif %}
+
+{% if email is not empty %}
+	<p><b>Email: </b>{{email}}</p>
 {% endif %}
 
 {% if comment is not empty %}
