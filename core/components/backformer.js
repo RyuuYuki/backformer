@@ -52,13 +52,34 @@
                             $('.bf-loading').remove();
                             $('.bf-fixed-overlay').show();
 
+                            //set custom param in form
+                            var attributes = bf.bind_custom_popup_params(button);
+
+                            if (typeof attributes == 'undefined' || attributes.length < 1) {
+
+                            } else {
+                                $.each(attributes, function(i, val) {
+                                    $('.'+i).html(val);
+                                });
+                            }
+
+                            //set add param 
+                            var field_h1 = $('h1').html();
+
+                            if (typeof field_h1 == 'undefined' || field_h1.length < 1) {
+
+                            } else { 
+                                 $('.bf-page-h1').html(field_h1);
+                            }
+                            $('.bf-page-link').html(document.location.href); 
+
                             $(".bf-img-capcha").off();
                             bf.bind_event_capcha(); //set refresh for click image
                             bf.update_capcha();
 
                             $("form[data-bf-config]").off();
 
-                            bf.init_form(config, bf.bind_custom_popup_params(button));
+                            bf.init_form(config, attributes);
                             bf.bind_close_popup();
                         }
                     })
@@ -75,7 +96,7 @@
                     $.each(button[0].attributes, function(index, attr) {
                         attr_el = attr.name;
                         if (/data\-bf\-field/.test(attr_el)) {
-                            attr_el = attr_el.replace('data-bf-field-', '');
+                            attr_el = attr_el.replace('data-', '');
                             attributes[attr_el] = attr.value;
                         }
                     });
@@ -123,7 +144,7 @@
                     } else {
                         config = config_popup;
                     }
-
+ 
                     $.post(
                         bf_path + "/init.php", {
                             'type': 'token',
@@ -134,15 +155,21 @@
                             $('[name="bf-token"]').remove();
 
                             //add custom field
-                            if (typeof attributes == 'undefined' || attributes.length < 1) {} else {
+                            if (typeof attributes == 'undefined' || attributes.length < 1) {
+
+                            } else {
                                 $.each(attributes, function(i, val) {
+                                    i = i.replace(/\-/g,'_');
                                     form.append('<input name="' + i + '" type="hidden" value="' + val + '" />');
                                 });
                             }
 
                             //add page info
-                            if (typeof attributes == 'undefined' || attributes.length < 1) {} else {
-                                form.append('<input name="bf_page_h1" type="hidden" value="' + $('h1').html() + '" />');
+                            var field_h1 = $('h1').html();
+                            if (typeof field_h1 == 'undefined' || field_h1.length < 1) {
+
+                            } else {
+                                form.append('<input name="bf_page_h1" type="hidden" value="' + field_h1 + '" />');
                             }
                             form.append('<input name="bf_page_link" type="hidden" value="' + document.location.href + '" />');
 
