@@ -1,6 +1,6 @@
-#Backformer 2.5.1
+#Backformer 2.5.2
 
-Форма обратной связи - [скачать](https://github.com/Rugoals/backformer/archive/2.5.1.zip).
+Форма обратной связи - [скачать](https://github.com/Rugoals/backformer/archive/2.5.2.zip).
 
 #####Системные требования
 * PHP5 >= 5.2.0
