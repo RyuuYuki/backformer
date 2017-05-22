@@ -1,0 +1,13 @@
+{
+    "name": "rugoals/kcaptcha",
+    "description": "Captcha lib",
+    "type": "library",
+    "license": "BSD",
+    "require": {},
+    "require-dev": {},
+    "autoload": {
+        "classmap": [
+            "kcaptcha.php"
+        ]
+    }
+}

@@ -6,10 +6,10 @@
 * @author Rugoals <rugoals@gmail.com>
 * @license Apache 2.0
 * @link https://github.com/Rugoals/backformer/
-* @version 2.5
+* @version 2.5.2
 */
 
-$debug = 0;
+$debug = 1;
 
 if($debug > 0) {
 	ini_set('error_reporting', E_ALL);
@@ -18,8 +18,12 @@ if($debug > 0) {
 
 define("PATH_BACKFORMER", $_SERVER['DOCUMENT_ROOT'].'/backformer/');
 
-require_once PATH_BACKFORMER.'core/libraries/Twig-1.18.1/lib/Twig/Autoloader.php'; 
-require_once PATH_BACKFORMER.'core/libraries/PHPMailer/PHPMailerAutoload.php';
+if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+	require_once PATH_BACKFORMER.'core/libraries/twig/twig/lib/Twig/Autoloader.php';
+	require_once PATH_BACKFORMER.'core/libraries/phpmailer/phpmailer/PHPMailerAutoload.php'; 
+} else {
+ 	require_once PATH_BACKFORMER.'core/libraries/autoload.php';  
+}
 
 session_start();
 
@@ -28,7 +32,7 @@ $lang = array();
 
 $default_config_name = 'default'; 
 
-$config['name'] = isset($_REQUEST['bf-config']) ? preg_replace ("/[^a-zA-Z0-9_\-]/","", $_REQUEST['bf-config']) : ''; 
+$config['name'] = isset($_REQUEST['bf-config']) ? preg_replace ("/[^a-z0-9_\-]/i","", $_REQUEST['bf-config']) : ''; 
 
 if(!file_exists(PATH_BACKFORMER.'configs/'.$config['name'].'/') || empty($config['name'])) {
 	$config['name'] = $default_config_name;

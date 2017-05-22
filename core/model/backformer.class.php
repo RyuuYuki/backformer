@@ -28,7 +28,7 @@ class Backformer extends Events  {
 
 	public function init() {
  
-		$type = isset($_REQUEST['type']) ? preg_replace ("/[^a-z]/i","", $_REQUEST['type']) : 'default';
+		$type = isset($_REQUEST['type']) ? preg_replace ("/[^0-9a-z_\-]/i","", $_REQUEST['type']) : 'default';
 
 		$out = array();  
 
@@ -218,7 +218,6 @@ class Backformer extends Events  {
 
 	protected function set_mail($body = '') {
 
-		require_once PATH_BACKFORMER.'core/libraries/PHPMailer/class.phpmailer.php';
 		$mail = new PHPMailer();
 
 		$mail->CharSet = 'utf-8';

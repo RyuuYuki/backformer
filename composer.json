@@ -1,14 +1,23 @@
 {
     "name": "Rugoals/backformer",
-    "description": "Simple ajax contact form",
+    "description": "Simple form of ajax",
     "license": "Apache 2.0",
-    "authors": [
-        {
-            "name": "Rugoals",
-            "email": "rugoals@gmail.com"
-        }
-    ],
+    "type": "project",
+    "config": {
+        "vendor-dir": "core/libraries"
+    },
+    "authors": [{
+        "name": "Rugoals",
+        "email": "rugoals@gmail.com"
+    }],
+    "repositories": [{
+        "type": "vcs",
+        "url": "https://github.com/Rugoals/kcaptcha"
+    }],
     "require": {
-        "php": ">=5.2.17"
-    }
+        "php": ">=5.2.7",
+        "phpmailer/phpmailer": "^5",
+        "twig/twig": "^1",
+        "Rugoals/kcaptcha": "^2"
+    } 
 }

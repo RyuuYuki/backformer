@@ -55,8 +55,9 @@
 
 .bf-row input,
 .bf-row textarea {
-    width: 250px;
+    width: 275px;
     padding: 10px;
+    box-sizing: border-box;
 }
 
 .bf-hidden {
